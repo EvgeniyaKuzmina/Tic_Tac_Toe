@@ -7,132 +7,102 @@ public class Main {
 
 
     public static void main(String[] args)  {
-        //System.out.println("     ");
-        //System.out.println("     ");
-        //System.out.println("     ");
-        // write your code here
+
         Scanner scanner = new Scanner(System.in);
 
-
-
-
-        char[] array = new char[9];
-
-        String symbol = scanner.next();
-
         String[][] matrix = new String[3][3];
-
-        array = symbol.toCharArray();
         int i = 0;
+        int it = 0;
 
         System.out.println("---------");
-
-        System.out.print("| ");
-
-        while (i < 3) {
-            System.out.print(array[i] + " ");
-            matrix[0][i] = String.valueOf(array[i]);
-            i++;
+        for (; i < 3; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < 3; j++) {
+                matrix[i][j] = " ";
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println("|");
         }
-        System.out.println("| ");
-        System.out.print("| ");
-
-        while (i < 6) {
-            System.out.print(array[i] + " ");
-
-            matrix[1][i - 3] = String.valueOf(array[i]);
-            i++;
-        }
-        System.out.println("| ");
-
-        System.out.print("| ");
-
-        while (i < 9) {
-            System.out.print(array[i] + " ");
-            matrix[2][i - 6] = String.valueOf(array[i]);
-            i++;
-        }
-        System.out.println("| ");
         System.out.println("---------");
 
-        System.out.println("Enter the coordinates");
+       // int coordinate1 = 0;
+        //int coordinate2 = 0;
 
-        int coordinate1 = 0;
-        int coordinate2 = 0;
-
-       // String input = scanner.nextLine();
         boolean result = false;
-        String answer = null;
+        String moves = null;
 
+        while (it < 9)  {
+            System.out.println("Enter the coordinates");
 
-            //coordinate1 = scanner.nextInt();
-            //coordinate2 = scanner.nextInt();
+            if (it % 2 != 0) {
+                moves = "O";
+            }
+            if (it % 2 == 0) {
 
-
+                moves = "X";
+            }
 
             while (true) {
-                String string = scanner.nextLine();
-
-                 if (scanner.hasNextInt()) {
-                    coordinate1 = scanner.nextInt();
-                    coordinate2 = scanner.nextInt();
+                if (scanner.hasNextInt()) {
+                    int coordinate1 = scanner.nextInt();
+                    int coordinate2 = scanner.nextInt();
 
                     if (coordinate1 < 1 || coordinate1 > 3 || coordinate2 < 1 || coordinate2 > 3) {
                         System.out.println("Coordinates should be from 1 to 3!");
-                        System.out.println("Enter the coordinates");
+                        break;
+
                     } else if (coordinate1 == 1) {
-
                         if (coordinate2 == 1 && !matrix[2][0].equals("X") && !matrix[2][0].equals("O")) {
-                            matrix[2][0] = "X";
+                            matrix[2][0] = moves;
                             result = true;
-
                         } else if (coordinate2 == 2 && !matrix[1][0].equals("X") && !matrix[1][0].equals("O")) {
-                            matrix[1][0] = "X";
+                            matrix[1][0] = moves;
                             result = true;
-
                         } else if (coordinate2 == 3 && !matrix[0][0].equals("X") && !matrix[0][0].equals("O")) {
-                            matrix[0][0] = "X";
+                            matrix[0][0] = moves;
                             result = true;
-
                         } else {
-                            System.out.println("This cell is occupied! Choose another one! \nEnter the coordinates");
+                            System.out.println("This cell is occupied! Choose another one!");
+                            break;
                         }
 
                     } else if (coordinate1 == 2) {
-
                         if (coordinate2 == 1 && !matrix[2][1].equals("X") && !matrix[2][1].equals("O")) {
-                            matrix[2][1] = "X";
+                            matrix[2][1] = moves;
                             result = true;
                         } else if (coordinate2 == 2 && !matrix[1][1].equals("X") && !matrix[1][1].equals("O")) {
-                            matrix[1][1] = "X";
+                            matrix[1][1] = moves;
                             result = true;
                         } else if (coordinate2 == 3 && !matrix[0][1].equals("X") && !matrix[0][1].equals("O")) {
-                            matrix[0][1] = "X";
+                            matrix[0][1] = moves;
                             result = true;
                         } else {
-                            System.out.println("This cell is occupied! Choose another one! \nEnter the coordinates");
+                            System.out.println("This cell is occupied! Choose another one!");
+                            break;
                         }
 
                     } else if (coordinate1 == 3) {
                         if (coordinate2 == 1 && !matrix[2][2].equals("X") && !matrix[2][2].equals("O")) {
-                            matrix[2][2] = "X";
+                            matrix[2][2] = moves;
                             result = true;
                         } else if (coordinate2 == 2 && !matrix[1][2].equals("X") && !matrix[1][2].equals("O")) {
-                            matrix[1][2] = "X";
+                            matrix[1][2] = moves;
                             result = true;
                         } else if (coordinate2 == 3 && !matrix[0][2].equals("X") && !matrix[0][2].equals("O")) {
-                            matrix[0][2] = "X";
+                            matrix[0][2] = moves;
                             result = true;
                         } else {
-                            System.out.println("This cell is occupied! Choose another one! \nEnter the coordinates");
+                            System.out.println("This cell is occupied! Choose another one!");
+                            break;
                         }
                     }
-                 } else if (!scanner.hasNextInt()){
+                } else if (!scanner.hasNextInt()) {
+                    String string = scanner.nextLine();
+                    System.out.println("You should enter numbers!");
+                    break;
 
-                     System.out.println("You should enter numbers!");
-                     System.out.println("Enter the coordinates");
                 }
-
+                it++;
                 if (result) {
                     System.out.println("---------");
                     for (i = 0; i < 3; i++) {
@@ -145,12 +115,11 @@ public class Main {
                     System.out.println("---------");
                     break;
                 }
-            }
+           }
 
             int countIfX = 0;
             int countIfO = 0;
             int empty = 0;
-            boolean impossible = false;
             boolean winX = false;
             boolean winO = false;
 
@@ -167,9 +136,7 @@ public class Main {
                 }
             }
 
-            if (Math.abs(countIfX - countIfO) > 1) {
-                impossible = true;
-            } else if (countIfX + countIfO == 9 || countIfX + countIfO + empty == 9) {
+            if (countIfX + countIfO == 9 || countIfX + countIfO + empty == 9) {
                 for (i = 0; i < 3; i++) {
                     if (matrix[i][0].equals("X") && matrix[i][0].equals(matrix[i][1]) && matrix[i][0].equals(matrix[i][2])) {
                         winX = true;
@@ -181,7 +148,7 @@ public class Main {
                     } else if (matrix[0][i].equals("O") && matrix[0][i].equals(matrix[1][i]) && matrix[0][i].equals(matrix[2][i])) {
                         winO = true;
                     }
-                    impossible = winX && winO;
+
                 }
                 if (matrix[1][1].equals("X")) {
                     if (matrix[1][1].equals(matrix[0][0]) && matrix[1][1].equals(matrix[2][2])) {
@@ -198,19 +165,19 @@ public class Main {
                     }
                 }
             }
-            if (impossible) {
-                System.out.print("Impossible");
-            } else if (winX) {
+            if (winX) {
                 System.out.print("X wins");
-
+                break;
             } else if (winO) {
                 System.out.print("O wins");
-            } else if (empty > 0) {
-                System.out.print("Game not finished");
-            } else {
+                break;
+            } else if (countIfX + countIfO == 9 && !winO && !winX){
                 System.out.print("Draw");
+                break;
             }
 
-
         }
+
+
     }
+}
